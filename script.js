@@ -1,5 +1,6 @@
 let lastOperand = 0;
 let operation = null;
+let result;
 
 const inputWindow = document.getElementById('inputWindow');
 
@@ -20,21 +21,23 @@ document.getElementById('btn_def').addEventListener('click', function () {
     inputWindow.value = '';
 })
 
+// кнопка = 
 document.getElementById('btn_calc').addEventListener('click', function () {
-    if (operation === 'sum'){
-        const resultat = lastOperand + parseInt(inputWindow.value);
-        operation = null;
-        lastOperand =0;
-        inputWindow.value = resultat;
-    }
-    if (operation === 'def'){
-        const resultat = lastOperand - parseInt(inputWindow.value);
-        operation = null;
-        lastOperand =0;
-        inputWindow.value = resultat;
-    }
+    if (operation){
+        switch (operation){
+            case '+': result = lastOperand + parseFloat(inputWindow.value);
+            break;
+            case '-': result = lastOperand - parseFloat(inputWindow.value);
+            break;
+            case '*': result = lastOperand * parseFloat(inputWindow.value);
+            break;
+            case '/': result = parseFloat(inputWindow.value) !== 0 ? lastOperand / parseFloat(inputWindow.value) : "Error div zero";
+            break;
+        }
+      
 })
 
+// кнопка С очистка
 document.getElementById('btn_clr').addEventListener('click', function () {
     lastOperand = 0;
     operation = null;
